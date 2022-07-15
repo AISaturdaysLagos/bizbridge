@@ -9,8 +9,8 @@ const express = require('express'),
 
 
 //BELOW WE CONNECT TO MONGO DATABASE
-      mongoose.connect("mongodb://localhost:27017/BIZBID", {useNewUrlParser:true, useUnifiedTopology:true});
-
+      mongoose.connect("mongodb+srv://Adebayo:welldone@cluster0.kjsnn.mongodb.net/BIZBID?retryWrites=true&w=majority", 
+        {useNewUrlParser:true, useUnifiedTopology:true});
 
       app.use(express.urlencoded({extended:true}));
       app.use(express.static("public"));
@@ -52,7 +52,11 @@ app.use(flash());
 
       app.use('/artisan', require('./routes/artisan')); 
 
+    let port = process.env.PORT;
+    if (port == null || port == "") {
+        port = 5050;
+    }
 
-      app.listen(process.env.PORT || 5050, function(){
-            console.log("Server started on port 5050");
+      app.listen(port, function(){
+            console.log("Server has started successfully");
       })
